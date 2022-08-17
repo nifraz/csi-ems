@@ -3,6 +3,8 @@ export interface Employee {
     name: string;
     email: string;
     dateOfBirth: Date;
+    sex: string;
+    designation: string;
     phone: string;
     address: string;
 }

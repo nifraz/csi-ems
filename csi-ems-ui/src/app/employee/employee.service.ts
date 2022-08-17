@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Employee } from './employee.model';
 
-const apiUrl = 'http://localhost:5001/api';
+const apiUrl = 'http://localhost:7000/api/employees';
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-
+  
   constructor(private httpClient: HttpClient) { }
 
   getEmployees() {
-    return this.httpClient.get<any>(apiUrl);
+    return this.httpClient.get<Employee[]>(apiUrl);
   }
 
   getEmployee(id: string){
