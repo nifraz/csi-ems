@@ -8,7 +8,6 @@ namespace Csi.Ems.Api.Models
 {
     public class EmployeeModel
     {
-        [Required]
         public Guid Id { get; set; }
         [Required]
         [MaxLength(128)]
