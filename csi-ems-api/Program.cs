@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace csi_ems_api
+namespace Csi.Ems.Api
 {
     public class Program
     {
