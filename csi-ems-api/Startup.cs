@@ -24,8 +24,10 @@ namespace Csi.Ems.Api
         {
             services.AddDbContextPool<EmsDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("EmsDb")));
             services.AddDbContext<EmsDbContext>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(Startup));
+
             services.AddControllers();
         }
 
@@ -37,7 +39,7 @@ namespace Csi.Ems.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

@@ -16,13 +16,11 @@ namespace Csi.Ems.Api.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
-        private readonly LinkGenerator linkGenerator;
 
-        public EmployeesController(IUnitOfWork unitOfWork, IMapper mapper, LinkGenerator linkGenerator)
+        public EmployeesController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
-            this.linkGenerator = linkGenerator;
         }
 
         [HttpGet]
@@ -40,7 +38,7 @@ namespace Csi.Ems.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<EmployeeModel>> Get(string id)
+        public async Task<ActionResult<EmployeeModel>> Get(Guid id)
         {
             try
             {
@@ -60,25 +58,20 @@ namespace Csi.Ems.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<EmployeeModel>> Post(EmployeeModel model)
         {
-            var existing = await unitOfWork.Employees.GetAsync(model.Id);
-            if (existing != null)
+            var emailExisting = await unitOfWork.Employees.FindAsync(e => e.Email == model.Email);
+            if (emailExisting != null)
             {
-                return BadRequest("Employee already exists");
-            }
-
-            var path = linkGenerator.GetPathByAction(nameof(Get), "Employees", new { model.Id });
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                return BadRequest("Could not use current Id");
+                return BadRequest("Employee email already exists");
             }
 
             try
             {
                 var entity = mapper.Map<Employee>(model);
+                //entity.Id = Guid.NewGuid();
                 unitOfWork.Employees.Add(entity);
                 if (await unitOfWork.CompleteAsync() > 0)
                 {
-                    return Created(path, mapper.Map<EmployeeModel>(entity));
+                    return CreatedAtAction(nameof(Get), new { id = entity.Id }, entity);
                 }
             }
             catch (Exception)
@@ -90,14 +83,14 @@ namespace Csi.Ems.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<EmployeeModel>> Put(string id, EmployeeModel model)
+        public async Task<ActionResult<EmployeeModel>> Put(Guid id, EmployeeModel model)
         {
             try
             {
                 var entity = await unitOfWork.Employees.GetAsync(id);
                 if (entity == null)
                 {
-                    return NotFound($"No Employee exists for id {id}");
+                    return NotFound($"Employee id {id} not found");
                 }
 
                 mapper.Map(model, entity);
@@ -116,14 +109,14 @@ namespace Csi.Ems.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             try
             {
                 var entity = await unitOfWork.Employees.GetAsync(id);
                 if (entity == null)
                 {
-                    return NotFound($"No Employee exists for id {id}");
+                    return NotFound($"Employee id {id} not found");
                 }
 
                 unitOfWork.Employees.Remove(entity);
