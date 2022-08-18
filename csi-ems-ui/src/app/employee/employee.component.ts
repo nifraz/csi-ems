@@ -8,12 +8,9 @@ import { EmployeeService } from './employee.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.employeeService.getEmployees().subscribe(res => {
-      console.log(res);
-    })
   }
 
 }

@@ -498,7 +498,7 @@ Version:4.4.3.3055-->
             <GeneratorProperties type="Dictionary&lt;string, object&gt;" version="1">
               <element>
                 <key type="string">Expression</key>
-                <value type="string">male|female</value>
+                <value type="string">Male|Female</value>
               </element>
               <element>
                 <key type="string">UseSequence</key>

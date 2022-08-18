@@ -1,1 +1,114 @@
-<p>employee-edit works!</p>
+<div class="row">
+    <div class="col-12 px-4 py-3 mb-2 bg-light d-flex justify-content-between">
+        <h2 class="fw-bold">{{ isEditMode ? 'Edit Employee' : 'Create Employee' }}</h2>
+        <div><a class="btn btn-secondary" [routerLink]="['/employees']"><i class="bi bi-arrow-left"></i>&nbsp;LIST</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 px-4 py-3 mb-2 bg-light">
+        <form [formGroup]="modelForm" (ngSubmit)="onSubmit()">
+            <div class="g-2 row pb-3">
+                <div class="col-12 d-flex flex-row align-content-center">
+                    <h6 class="m-0">Please enter the following details.</h6>
+                </div>
+            </div>
+            <div class="g-2 row">
+
+                <div class="col-12">
+                    <div class="form-floating w-100">
+                        <input type="text" class="form-control" id="id" placeholder="Employee ID" formControlName="id"
+                            [disabled]="true">
+                        <label for="id">ID</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <div class="form-floating w-100">
+                        <input class="form-control" id="Name" placeholder="Employee Name" formControlName="name">
+                        <label for="Name">Name</label>
+                    </div>
+                    <span *ngIf="(name?.touched || name?.dirty) && name?.invalid" class="text-danger small">Please enter
+                        a valid Name.</span>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <div class="form-floating w-100">
+                        <input class="form-control" id="Email" placeholder="Employee Email" formControlName="email">
+                        <label for="Email">Email</label>
+                    </div>
+                    <span *ngIf="(email?.touched || email?.dirty) && email?.invalid" class="text-danger small">Please
+                        enter a valid Email.</span>
+                </div>
+
+                <div class="col-12 col-sm-4">
+                    <div class="form-floating w-100">
+                        <input type="date" class="form-control" id="dateOfBirth" placeholder="Employee Date of Birth"
+                            formControlName="dateOfBirth" #dateOfBirth>
+                        <label for="dateOfBirth">Date of Birth</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-8">
+                    <div class="px-2">
+                        <label>Sex</label>
+                        <div class="d-flex gap-2 ">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="male" value="Male" formControlName="sex">
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="female" value="Female" formControlName="sex">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-7">
+                    <div class="form-floating w-100">
+                        <select class="form-select" id="designation" formControlName="designation">
+                            <option *ngFor="let designation of designations" [ngValue]="designation">
+                                {{ designation }}
+                            </option>
+                        </select>
+                        <label for="Level">Designation</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-5">
+                    <div class="form-floating w-100">
+                        <input type="tel" class="form-control" id="phone" placeholder="Employee Phone"
+                            formControlName="phone">
+                        <label for="phone">Phone</label>
+                    </div>
+                    <span *ngIf="(phone?.touched || phone?.dirty) && phone?.invalid" class="text-danger small">Please
+                        enter a valid Phone.</span>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating w-100">
+                        <textarea class="form-control" id="address" placeholder="Employee Address"
+                            formControlName="address"></textarea>
+                        <label for="address">Address</label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <span *ngIf="(modelForm?.touched || modelForm?.dirty) && modelForm?.invalid"
+                        class="text-danger small">Please provide valid details.</span>
+                </div>
+                <div class="gap-2 col-12 d-flex">
+                    <button class="btn btn-success shadow" type="submit" [disabled]="modelForm.invalid"><i
+                            class="bi bi-save"></i>&nbsp;{{ isEditMode ?
+                        'UPDATE' : 'SAVE' }}</button>
+                    <a class="btn btn-secondary shadow" (click)="onCancel()"><i
+                            class="bi bi-x-circle"></i>&nbsp;CANCEL</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>

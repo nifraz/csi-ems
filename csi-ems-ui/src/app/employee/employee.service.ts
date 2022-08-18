@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { Employee } from './employee.model';
 
 const apiUrl = 'http://localhost:7000/api/employees';
+//const apiUrl = 'https://localhost:44373/api/employees';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,8 +18,7 @@ export class EmployeeService {
   }
 
   getEmployee(id: string){
-    return this.httpClient.get<Employee>(apiUrl, 
-      { params: {'id': id }});
+    return this.httpClient.get<Employee>(`${apiUrl}/${id}`);
   }
 
   createEmployee(newEmployee: Employee) {
@@ -25,13 +26,11 @@ export class EmployeeService {
   }
 
   updateEmployee(id: string, updatedEmployee: Employee){
-    return this.httpClient.put<Employee>(apiUrl, updatedEmployee,
-      { params: {'id': id }});
+    return this.httpClient.put<Employee>(`${apiUrl}/${id}`, updatedEmployee);
   }
 
   deleteEmployee(id: string){
-    return this.httpClient.delete(apiUrl, 
-      { params: {'id': id }});
+    return this.httpClient.delete(`${apiUrl}/${id}`);
   }
   
 }

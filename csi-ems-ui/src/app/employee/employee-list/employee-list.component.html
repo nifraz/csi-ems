@@ -1,4 +1,45 @@
-<p>employee-list works!</p>
-<table class="table table-hover">
-    ...
-</table>
+<div class="row">
+    <div class="col-12 px-4 py-3 mb-2 bg-light d-flex justify-content-between">
+        <h2 class="fw-bold">Employee List</h2>
+        <div><a class="btn btn-success" [routerLink]="['/employees', 'new']"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 p-3 mb-2 bg-light">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>D.O.B.</th>
+                        <th>Sex</th>
+                        <th>Designation</th>
+                        <th>Phone</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of list">
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.dateOfBirth | date:'fullDate' }}</td>
+                        <td>{{ employee.sex }}</td>
+                        <td>{{ employee.designation }}</td>
+                        <td>{{ employee.phone }}</td>
+                        <td>
+                            <div class="d-flex gap-1">
+                                <a class="btn btn-sm btn-primary" [routerLink]="[employee.id]">Details</a>
+                                <a class="btn btn-sm btn-outline-primary" [routerLink]="[employee.id, 'edit']">Edit</a>
+                                <a class="btn btn-sm btn-danger" (click)="onDelete(employee.id)">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
