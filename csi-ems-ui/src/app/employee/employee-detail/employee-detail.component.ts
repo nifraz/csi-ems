@@ -57,12 +57,14 @@ export class EmployeeDetailComponent implements OnInit {
     if (confirm('Are you sure you want to delete this record?')) {
       this.employeeService.deleteEmployee(this.employeeId)
         .subscribe({
-          next: value => {
+          next: () => {
+            console.log('succ');
             this.spinner.hide();
             this.toastr.success('Employee record deleted.', 'SUCCESS');
             this.router.navigate(['/employees']);
           },
           error: (err: HttpErrorResponse) => {
+            console.log(err);
             this.spinner.hide();
             this.toastr.error(`Employee delete failed. ${err.message}`, 'ERROR');
           },

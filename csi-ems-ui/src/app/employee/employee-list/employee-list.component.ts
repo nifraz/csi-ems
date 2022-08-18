@@ -40,7 +40,7 @@ export class EmployeeListComponent implements OnInit {
     if (confirm('Are you sure you want to delete this record?')) {
       this.employeeService.deleteEmployee(id)
         .subscribe({
-          next: value => {
+          next: () => {
             this.spinner.hide();
             this.toastr.success('Employee record deleted.', 'SUCCESS');
             this.onFetch();

@@ -91,7 +91,7 @@ export class EmployeeEditComponent implements OnInit {
         .subscribe({
           next: value => {
             this.spinner.hide();
-            this.toastr.success('Employee data added.', 'SUCCESS');
+            this.toastr.success('Employee data updated.', 'SUCCESS');
             this.onCancel();
           },
           error: (err: HttpErrorResponse) => {
@@ -106,7 +106,7 @@ export class EmployeeEditComponent implements OnInit {
         .subscribe({
           next: value => {
             this.spinner.hide();
-            this.toastr.success('Employee data updated.', 'SUCCESS');
+            this.toastr.success('Employee data added.', 'SUCCESS');
             this.router.navigate(['/employees', value.id]);
           },
           error: (err: HttpErrorResponse) => {

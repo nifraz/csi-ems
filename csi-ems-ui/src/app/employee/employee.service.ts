@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { Employee } from './employee.model';
 
 const apiUrl = 'http://localhost:7000/api/employees';
-//const apiUrl = 'https://localhost:44373/api/employees';
+// const apiUrl = 'https://localhost:44373/api/employees';
 
 @Injectable({
   providedIn: 'root'

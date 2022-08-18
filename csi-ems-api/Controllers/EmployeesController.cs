@@ -33,7 +33,7 @@ namespace Csi.Ems.Api.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Server Failure");
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -45,13 +45,13 @@ namespace Csi.Ems.Api.Controllers
                 var result = await unitOfWork.Employees.GetAsync(id);
                 if (result == null)
                 {
-                    return NotFound("Employee not found");
+                    return NotFound();
                 }
                 return mapper.Map<EmployeeModel>(result);
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Server Failure");
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -61,7 +61,7 @@ namespace Csi.Ems.Api.Controllers
             var emailExisting = await unitOfWork.Employees.FindAsync(e => e.Email == model.Email);
             if (emailExisting != null)
             {
-                return BadRequest("Employee email already exists");
+                return BadRequest();
             }
 
             try
@@ -76,7 +76,7 @@ namespace Csi.Ems.Api.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Server Failure");
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             return BadRequest();
@@ -90,7 +90,7 @@ namespace Csi.Ems.Api.Controllers
                 var entity = await unitOfWork.Employees.GetAsync(id);
                 if (entity == null)
                 {
-                    return NotFound($"Employee id {id} not found");
+                    return NotFound();
                 }
 
                 mapper.Map(model, entity);
@@ -102,10 +102,10 @@ namespace Csi.Ems.Api.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Server Failure");
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            return BadRequest();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -116,19 +116,19 @@ namespace Csi.Ems.Api.Controllers
                 var entity = await unitOfWork.Employees.GetAsync(id);
                 if (entity == null)
                 {
-                    return NotFound($"Employee id {id} not found");
+                    return NotFound();
                 }
 
                 unitOfWork.Employees.Remove(entity);
                 if (await unitOfWork.CompleteAsync() > 0)
                 {
-                    return Ok("Employee record has been deleted");
+                    return Ok();
                 }
 
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Server Failure");
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             return BadRequest();
