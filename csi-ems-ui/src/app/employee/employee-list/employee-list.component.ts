@@ -46,7 +46,6 @@ export class EmployeeListComponent implements OnInit {
             this.onFetch();
           },
           error: (err: HttpErrorResponse) => {
-            console.log(err);
             this.spinner.hide();
             this.toastr.error(`Employee delete failed. ${err.message}`, 'ERROR');
           },

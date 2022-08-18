@@ -1,7 +1,97 @@
-<div class="p-4 py-3 mb-2 bg-light">
-    <h2 class="fw-bold">Employee Name</h2>
+<div class="row">
+    <div class="col-12 px-4 py-3 mb-2 bg-light d-flex justify-content-between">
+        <h2 class="fw-bold">Employee Details</h2>
+        <div><a class="btn btn-secondary" [routerLink]="['/employees']"><i class="bi bi-arrow-left"></i>&nbsp;LIST</a>
+        </div>
+    </div>
 </div>
 
-<p>employee-detail works!</p>
+<div class="row px-4 py-3 mb-2 bg-light">
+    <div class="col-lg-4 ps-lg-0">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                <h5 class="my-3">{{ employee.name }}</h5>
+                <p class="text-muted mb-1">{{ employee.designation }}</p>
+                <p class="text-muted mb-4">{{ employee.address }}</p>
+                <div class="d-flex justify-content-center mb-2">
+                    <a class="btn btn-outline-secondary" [routerLink]="['edit']">Edit</a>
+                    <button type="button" class="btn btn-danger ms-1" (click)="onDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-lg-8 pe-lg-0">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">ID</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ employee.id }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ employee.name }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ employee.dateOfBirth }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Sex</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ employee.sex }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Designation</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ employee.designation }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Phone</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ employee.phone }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Address</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{ employee.address }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>

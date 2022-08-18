@@ -71,7 +71,7 @@ export class EmployeeEditComponent implements OnInit {
                 'address': this.employee.address,
               }
             );
-            this.toastr.info('Employee data retrieved.', 'INFO');
+            //this.toastr.info('Employee data retrieved.', 'INFO');
           },
           error: (err: HttpErrorResponse) => {
             this.spinner.hide();
